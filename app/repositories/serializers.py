@@ -50,6 +50,7 @@ class OrderSerializer(ma.SQLAlchemyAutoSchema):
             'detail'
         )
 
+
 class BeverageSerializer(ma.SQLAlchemyAutoSchema):
 
     class Meta:
