@@ -11,3 +11,11 @@ def create_beverage():
     response = beverage if not error else {'error': error}
     status_code = 200 if not error else 400
     return jsonify(response), status_code
+
+
+@beverage.route('/', methods=PUT)
+def update_beverage():
+    beverage, error = BeverageController.update(request.json)
+    response = beverage if not error else {'error': error}
+    status_code = 200 if not error else 400
+    return jsonify(response), status_code
