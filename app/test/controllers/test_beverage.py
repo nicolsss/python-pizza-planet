@@ -12,7 +12,21 @@ def test_create(app, beverage: dict):
 
 
 def test_update(app, beverage: dict):
-    return
+    created_beverage, _ = BeverageController.create(beverage)
+    updated_fields = {
+        'name': 'updated',
+        'price': 10
+    }
+    updated_beverage, error = BeverageController.update({
+        '_id': created_beverage['_id'],
+        **updated_fields
+    })
+    pytest.assume(error is None)
+    beverage_from_db, error = BeverageController().get_by_id(created_beverage['_id'])
+    pytest.assume(error is None)
+    for param, value in updated_fields.items():
+        pytest.assume(updated_beverage[param] == value)
+        pytest.assume(beverage_from_db[param] == value)
 
 
 def test_get_by_id(app, beverage: dict):
