@@ -15,6 +15,7 @@ class OrderController(BaseController):
         price = sum(ingredient.price for ingredient in ingredients)
         if beverages:
             price += sum(beverage.price for beverage in beverages)
+        price += size_price
         return round(price, 2)
 
     @classmethod
