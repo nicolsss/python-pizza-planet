@@ -15,6 +15,7 @@ class Order(db.Model):
 
     size = db.relationship('Size', backref=db.backref('size'))
     detail = db.relationship('OrderDetail', backref=db.backref('order_detail'))
+    beverages = db.relationship('OrderBeverage', backref=db.backref('order_beverage'))
 
 
 class Ingredient(db.Model):

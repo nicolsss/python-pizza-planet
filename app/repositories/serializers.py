@@ -31,26 +31,6 @@ class OrderDetailSerializer(ma.SQLAlchemyAutoSchema):
         )
 
 
-class OrderSerializer(ma.SQLAlchemyAutoSchema):
-    size = ma.Nested(SizeSerializer)
-    detail = ma.Nested(OrderDetailSerializer, many=True)
-
-    class Meta:
-        model = Order
-        load_instance = True
-        fields = (
-            '_id',
-            'client_name',
-            'client_dni',
-            'client_address',
-            'client_phone',
-            'date',
-            'total_price',
-            'size',
-            'detail'
-        )
-
-
 class BeverageSerializer(ma.SQLAlchemyAutoSchema):
 
     class Meta:
@@ -69,4 +49,26 @@ class OrderBeverageSerializer(ma.SQLAlchemyAutoSchema):
         fields = (
             'beverage_price',
             'beverage'
+        )
+
+
+class OrderSerializer(ma.SQLAlchemyAutoSchema):
+    size = ma.Nested(SizeSerializer)
+    detail = ma.Nested(OrderDetailSerializer, many=True)
+    beverages = ma.Nested(OrderBeverageSerializer, many=True)
+
+    class Meta:
+        model = Order
+        load_instance = True
+        fields = (
+            '_id',
+            'client_name',
+            'client_dni',
+            'client_address',
+            'client_phone',
+            'date',
+            'total_price',
+            'size',
+            'detail',
+            'beverages'
         )
