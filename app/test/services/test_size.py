@@ -4,8 +4,10 @@ from app.test.utils.functions import get_random_string, get_random_price
 
 
 def test_create_size_service(create_size):
+    # Act
     size = create_size.json
 
+    # Assert
     pytest.assume(create_size.status.startswith('200'))
     pytest.assume(size['_id'])
     pytest.assume(size['name'])
@@ -42,7 +44,10 @@ def test_get_size_by_id_service(client, create_size, size_uri):
 
 
 def test_get_sizes_service(client, create_sizes, size_uri):
+    # Act
     response = client.get(size_uri)
+    
+    # Asset
     pytest.assume(response.status.startswith('200'))
     returned_sizes = {size['_id']: size for size in response.json}
     for size in create_sizes:
