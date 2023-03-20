@@ -50,7 +50,7 @@ def test__get_beverage_by_id__when_have_a_beverage_dict__should_return_a_beverag
         pytest.assume(beverage_from_db[param] == value)
 
 
-def test__get_all_beverages__when_have_a_dict_should_return_all_beverages(app, beverages: list):
+def test__get_all_beverages__when_have_a_list_should_return_all_beverages(app, beverages: list):
     # Arrange
     created_beverages = []
     for beverage in beverages:
