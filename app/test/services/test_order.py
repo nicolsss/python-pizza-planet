@@ -31,3 +31,14 @@ def test_get_order_by_id_service(client, create_order, order_uri):
     returned_order = response.json
     for param, value in current_order.items():
         pytest.assume(returned_order[param] == value)
+
+
+def test_get_orders_service(client, create_orders, order_uri):
+    # Act
+    response = client.get(order_uri)
+    
+    # Assert
+    pytest.assume(response.status.startswith("200"))
+    returned_orders = {order["_id"]: order for order in response.json}
+    for order in create_orders:
+        pytest.assume(order["_id"] in returned_orders)
